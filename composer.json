@@ -19,7 +19,7 @@
     }
   },
   "require": {
-    "illuminate/support": "^8",
+    "illuminate/support": "^10",
     "aws/aws-sdk-php": "^3.20.6"
   },
   "require-dev": {
