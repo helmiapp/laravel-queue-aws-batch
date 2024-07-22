@@ -66,8 +66,9 @@ class BatchQueue extends DatabaseQueue
     protected function getBatchDisplayName($job)
     {
         if (is_object($job)) {
-            return method_exists($job, 'displayName')
-                ? $job->displayName() : str_replace('\\', '_', (string)get_class($job));
+            $name = method_exists($job, 'displayName')
+                ? $job->displayName() : get_class($job);
+            return str_replace('\\', '_', $name);
         } else {
             return is_string($job) ? explode('@', $job)[0] : null;
         }
