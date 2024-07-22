@@ -46,8 +46,10 @@ class BatchQueue extends DatabaseQueue
 
     public function push($job, $data = '', $queue = null)
     {
+        $jobName = $this->getBatchDisplayName($job);
         $payload = $this->createPayload($job, $data);
-        return $this->pushToBatch($queue, $payload, $this->getBatchDisplayName($job));
+        \Log::info("AWS Batch Job Name: " . $jobName);
+        return $this->pushToBatch($queue, $payload, $jobName);
     }
 
     public function pushRaw($payload, $queue = null, array $options = [])
