@@ -68,9 +68,12 @@ class BatchQueue extends DatabaseQueue
         if (is_object($job)) {
             $name = method_exists($job, 'displayName')
                 ? $job->displayName() : get_class($job);
+            \Log::info("Job is object");
             return str_replace('\\', '_', $name);
         } else {
-            return is_string($job) ? explode('@', $job)[0] : null;
+            \Log::info("Job is string");
+            $name = is_string($job) ? explode('@', $job)[0] : null;
+            return $name != null ? str_replace('\\', '_', $name) : null;
         }
     }
 
